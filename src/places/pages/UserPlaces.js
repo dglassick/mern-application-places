@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import PlaceList from '../components/PlaceList';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+
+import Loader from 'calcite-react/Loader';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const UserPlaces = () => {
@@ -35,7 +36,7 @@ const UserPlaces = () => {
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
         <div className='center'>
-          <LoadingSpinner />
+          <Loader />
         </div>
       )}
       {!isLoading && loadedPlaces && (

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { TopNavList, TopNavLink } from 'calcite-react/TopNav';
 
 import { AuthContext } from '../../context/auth-context';
 import './NavLinks.css';
@@ -8,33 +9,26 @@ const NavLinks = props => {
   const auth = useContext(AuthContext);
 
   return (
-    <ul className="nav-links">
-      <li>
-        <NavLink to="/" exact>
-          ALL USERS
-        </NavLink>
-      </li>
+    <TopNavList>
+      <TopNavLink as={NavLink} to='/' exact>
+        ALL USERS
+      </TopNavLink>
       {auth.isLoggedIn && (
-        <li>
-          <NavLink to={`/${auth.userId}/places`}>MY PLACES</NavLink>
-        </li>
+        <TopNavLink as={NavLink} to={`/${auth.userId}/places`}>
+          MY PLACES
+        </TopNavLink>
       )}
       {auth.isLoggedIn && (
-        <li>
-          <NavLink to="/places/new">ADD PLACE</NavLink>
-        </li>
+        <TopNavLink as={NavLink} to='/places/new'>
+          ADD PLACE
+        </TopNavLink>
       )}
       {!auth.isLoggedIn && (
-        <li>
-          <NavLink to="/auth">AUTHENTICATE</NavLink>
-        </li>
+        <TopNavLink as={NavLink} to='/auth'>
+          AUTHENTICATE
+        </TopNavLink>
       )}
-      {auth.isLoggedIn && (
-        <li>
-          <button onClick={auth.logout}>LOGOUT</button>
-        </li>
-      )}
-    </ul>
+    </TopNavList>
   );
 };
 

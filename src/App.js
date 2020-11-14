@@ -14,7 +14,7 @@ import {
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
-import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
+import Loader from 'calcite-react/Loader';
 
 const Users = React.lazy(() => import('./user/pages/Users'));
 const NewPlace = React.lazy(() => import('./places/pages/NewPlace'));
@@ -78,7 +78,7 @@ const App = () => {
           <Suspense
             fallback={
               <div className='center'>
-                <LoadingSpinner />
+                <Loader />
               </div>
             }
           >

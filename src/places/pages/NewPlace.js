@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import Loader from 'calcite-react/Loader';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import {
   VALIDATOR_REQUIRE,
@@ -66,7 +66,7 @@ const NewPlace = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <form className='place-form' onSubmit={placeSubmitHandler}>
-        {isLoading && <LoadingSpinner asOverlay />}
+        {isLoading && <Loader asOverlay />}
         <Input
           id='title'
           element='input'

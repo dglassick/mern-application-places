@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
-
+import Button, { ButtonGroup } from 'calcite-react/Button';
+import ButtonCopy from '../../shared/components/FormElements/ButtonCopy';
 import Card from '../../shared/components/UIElements/Card';
-import Button from '../../shared/components/FormElements/Button';
+
 import Modal from '../../shared/components/UIElements/Modal';
 import Map from '../../shared/components/UIElements/Map';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import Loader from 'calcite-react/Loader';
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import './PlaceItem.css';
@@ -65,12 +66,14 @@ const PlaceItem = props => {
         footerClass='place-item__modal-actions'
         footer={
           <React.Fragment>
-            <Button inverse onClick={cancelDeleteHandler}>
-              CANCEL
-            </Button>
-            <Button danger onClick={confirmDeleteHandler}>
-              DELETE
-            </Button>
+            <ButtonGroup>
+              <Button clear onClick={cancelDeleteHandler}>
+                CANCEL
+              </Button>
+              <Button red onClick={confirmDeleteHandler}>
+                DELETE
+              </Button>
+            </ButtonGroup>
           </React.Fragment>
         }
       >
@@ -81,7 +84,7 @@ const PlaceItem = props => {
       </Modal>
       <li className='place-item'>
         <Card className='place-item__content'>
-          {isLoading && <LoadingSpinner asOverlay />}
+          {isLoading && <Loader asOverlay />}
           <div className='place-item__image'>
             <img
               src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
@@ -94,15 +97,17 @@ const PlaceItem = props => {
             <p>{props.description}</p>
           </div>
           <div className='place-item__actions'>
-            <Button inverse onClick={openMapHandler}>
+            <Button clear onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
             {auth.userId === props.creatorId && (
-              <Button to={`/places/${props.id}`}>EDIT</Button>
+              <Button clearGray as={ButtonCopy} to={`/places/${props.id}`}>
+                EDIT
+              </Button>
             )}
 
             {auth.userId === props.creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
+              <Button red onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>
             )}
